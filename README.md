@@ -11,6 +11,22 @@ Evaluate AI-generated responses using multiple evaluation agents:
 - Hallucination Detection Agent
 - Completeness Judge Agent
 - Verdict Agent
+## Milestone 2
+
+### Relevance Judge Agent
+Calculates semantic similarity between question and response using Sentence Transformers and cosine similarity.
+
+### Accuracy Judge Agent
+Compares AI response against the reference answer and generates an accuracy score.
+
+### Hallucination Detection Agent
+Detects potentially unsupported or incorrect responses using semantic similarity analysis.
+
+### Evaluation Dashboard
+Displays:
+- Relevance Score
+- Accuracy Score
+- Hallucination Status
 
 ## Milestone 1
 
