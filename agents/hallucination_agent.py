@@ -1,8 +1,6 @@
-from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
-
+from agents.model_loader import model
 def detect_hallucination(response, reference):
 
     embeddings = model.encode(
