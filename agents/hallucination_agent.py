@@ -12,7 +12,7 @@ def detect_hallucination(response, reference):
         [embeddings[1]]
     )[0][0]
 
-    if similarity < 0.6:
+    if similarity < 0.85:
         return "Possible Hallucination"
 
     return "No Hallucination Detected"
