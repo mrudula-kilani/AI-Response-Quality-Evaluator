@@ -37,15 +37,22 @@ if st.button("Evaluate"):
 
         st.metric(
             "Relevance Score",
-            f"{relevance:.2f}/10"
-        )
+            f"{relevance['score']:.2f}/10"
+        )   
+
+        st.write("**Reason:**")
+        st.write(relevance["reason"])
 
         st.metric(
             "Accuracy Score",
-            f"{accuracy:.2f}/10"
+            f"{accuracy['score']:.2f}/10"
         )
 
-        st.write(
-            "Hallucination Status:",
-            hallucination
-        )
+        st.write("**Evidence:**")
+        st.write(accuracy["evidence"])
+
+        st.write("**Hallucination Status:**")
+        st.write(hallucination["status"])
+
+        st.write("**Reason:**")
+        st.write(hallucination["reason"])
