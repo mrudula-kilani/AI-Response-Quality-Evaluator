@@ -3,6 +3,7 @@ import streamlit as st
 from agents.relevance_agent import relevance_score
 from agents.accuracy_agent import accuracy_score
 from agents.hallucination_agent import detect_hallucination
+from agents.completeness_agent import completeness_score
 from agents.verdict_agent import overall_verdict
 
 st.set_page_config(page_title="AI Response Quality Evaluator")
@@ -17,34 +18,41 @@ if st.button("Evaluate"):
 
     if question and response and reference:
 
-        # Evaluate relevance
+        # Relevance
         relevance = relevance_score(
             question,
             response
         )
 
-        # Evaluate accuracy
+        # Accuracy
         accuracy = accuracy_score(
             response,
             reference
         )
 
-        # Detect hallucination
+        # Hallucination
         hallucination = detect_hallucination(
             response,
             reference
         )
 
-        # Generate overall verdict
+        # Completeness
+        completeness = completeness_score(
+            question,
+            response
+        )
+
+        # Overall Verdict
         verdict = overall_verdict(
             relevance["score"],
             accuracy["score"],
+            completeness["score"],
             hallucination["status"]
         )
 
-        # Display results
         st.subheader("Evaluation Results")
 
+        # Relevance
         st.metric(
             "Relevance Score",
             f"{relevance['score']:.2f}/10"
@@ -53,6 +61,7 @@ if st.button("Evaluate"):
         st.write("**Reason:**")
         st.write(relevance["reason"])
 
+        # Accuracy
         st.metric(
             "Accuracy Score",
             f"{accuracy['score']:.2f}/10"
@@ -61,12 +70,23 @@ if st.button("Evaluate"):
         st.write("**Evidence:**")
         st.write(accuracy["evidence"])
 
+        # Hallucination
         st.write("**Hallucination Status:**")
         st.write(hallucination["status"])
 
         st.write("**Reason:**")
         st.write(hallucination["reason"])
 
+        # Completeness
+        st.metric(
+            "Completeness Score",
+            f"{completeness['score']:.2f}/10"
+        )
+
+        st.write("**Feedback:**")
+        st.write(completeness["feedback"])
+
+        # Verdict
         st.subheader("Overall Verdict")
 
         st.metric(
